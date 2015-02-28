@@ -231,7 +231,7 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
     if (toast.imageCornerRadius > 0) {
         // Begin a new image that will be the new image with the rounded corners
         // (here with the size of an UIImageView)
-        UIGraphicsBeginImageContextWithOptions(self.toast.imageSize, NO, 1.0);
+        UIGraphicsBeginImageContextWithOptions(self.toast.imageSize, NO, 0.0);
         
         CGRect imageRect = CGRectMake(0, 0, self.toast.imageSize.width, self.toast.imageSize.height);
         
