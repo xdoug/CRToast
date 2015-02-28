@@ -304,6 +304,11 @@ extern NSString *const kCRToastBackgroundViewKey;
 extern NSString *const kCRToastImageKey;
 
 /**
+ The image content size to use for `kCRToastImageKey` image. Expects type `NSValue` with a `CGSize`.
+ */
+extern NSString *const kCRToastImageSizeKey;
+
+/**
  The image content mode to use for `kCRToastImageKey` image. Exptects type `UIViewContentMode`
  */
 extern NSString *const kCRToastImageContentModeKey;
@@ -421,6 +426,7 @@ extern NSString *const kCRToastCaptureDefaultWindowKey;
 @property (nonatomic, readonly) UIColor *backgroundColor;
 @property (nonatomic, readonly) UIView *backgroundView;
 @property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, readonly) CGSize imageSize;
 @property (nonatomic, readonly) UIViewContentMode imageContentMode;
 @property (nonatomic, readonly) CRToastAccessoryViewAlignment imageAlignment;
 @property (nonatomic, readonly) UIActivityIndicatorViewStyle activityIndicatorViewStyle;

@@ -214,6 +214,7 @@ NSString *const kCRToastStatusBarStyleKey                   = @"kCRToastStatusBa
 NSString *const kCRToastBackgroundColorKey                  = @"kCRToastBackgroundColorKey";
 NSString *const kCRToastBackgroundViewKey                   = @"kCRToastBackgroundViewKey";
 NSString *const kCRToastImageKey                            = @"kCRToastImageKey";
+NSString *const kCRToastImageSizeKey                        = @"kCRToastImageSizeKey";
 NSString *const kCRToastImageContentModeKey                 = @"kCRToastImageContentModeKey";
 NSString *const kCRToastImageAlignmentKey                   = @"kCRToastImageAlignmentKey";
 NSString *const kCRToastShowActivityIndicatorKey            = @"kCRToastShowActivityIndicatorKey";
@@ -268,6 +269,7 @@ static UIStatusBarStyle              kCRStatusBarStyleDefault               = UI
 static UIColor  *                    kCRBackgroundColorDefault              = nil;
 static UIView   *                    kCRBackgroundView                      = nil;
 static UIImage  *                    kCRImageDefault                        = nil;
+static CGSize                        kCRImageSizeDefault;
 static UIViewContentMode             kCRImageContentModeDefault             = UIViewContentModeCenter;
 static CRToastAccessoryViewAlignment kCRImageAlignmentDefault               = CRToastAccessoryViewAlignmentLeft;
 static BOOL                          kCRShowActivityIndicatorDefault        = NO;
@@ -339,6 +341,7 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
                                 kCRToastBackgroundColorKey                  : NSStringFromClass([UIColor class]),
                                 kCRToastBackgroundViewKey                   : NSStringFromClass([UIView class]),
                                 kCRToastImageKey                            : NSStringFromClass([UIImage class]),
+                                kCRToastImageSizeKey                        : NSStringFromClass([[NSValue valueWithCGSize:kCRImageSizeDefault] class]),
                                 kCRToastImageContentModeKey                 : NSStringFromClass([@(kCRImageContentModeDefault) class]),
                                 kCRToastImageAlignmentKey                   : NSStringFromClass([@(kCRImageAlignmentDefault) class]),
                                 kCRToastShowActivityIndicatorKey            : NSStringFromClass([@(kCRShowActivityIndicatorDefault) class]),
@@ -411,6 +414,7 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
     if (defaultOptions[kCRToastBackgroundColorKey])                 kCRBackgroundColorDefault               = defaultOptions[kCRToastBackgroundColorKey];
     if (defaultOptions[kCRToastBackgroundViewKey])                  kCRBackgroundView                       = defaultOptions[kCRToastBackgroundViewKey];
     if (defaultOptions[kCRToastImageKey])                           kCRImageDefault                         = defaultOptions[kCRToastImageKey];
+    if (defaultOptions[kCRToastImageSizeKey])                       kCRImageSizeDefault                     = [defaultOptions[kCRToastImageSizeKey] CGSizeValue];
     if (defaultOptions[kCRToastImageContentModeKey])                kCRImageContentModeDefault              = [defaultOptions[kCRToastImageContentModeKey] integerValue];
     if (defaultOptions[kCRToastImageAlignmentKey])                  kCRImageAlignmentDefault                = [defaultOptions[kCRToastImageAlignmentKey] integerValue];
     if (defaultOptions[kCRToastShowActivityIndicatorKey])           kCRShowActivityIndicatorDefault         = [defaultOptions[kCRToastShowActivityIndicatorKey] boolValue];
@@ -661,6 +665,10 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
 
 - (UIImage*)image {
     return _options[kCRToastImageKey] ?: kCRImageDefault;
+}
+
+- (CGSize)imageSize {
+    return _options[kCRToastImageSizeKey] ? [_options[kCRToastImageSizeKey] CGSizeValue]: kCRImageSizeDefault;
 }
 
 - (UIViewContentMode)imageContentMode {

@@ -216,7 +216,17 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
         _subtitleLabel.shadowOffset = toast.subtitleTextShadowOffset;
         _subtitleLabel.shadowColor = toast.subtitleTextShadowColor;
     }
-    _imageView.image = toast.image;
+    
+    if (!CGSizeEqualToSize(self.toast.imageSize, CGSizeZero)) {
+        UIGraphicsBeginImageContextWithOptions(self.toast.imageSize, NO, 0.0);
+        [toast.image drawInRect:CGRectMake(0, 0, self.toast.imageSize.width, self.toast.imageSize.height)];
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        _imageView.image = newImage;
+        UIGraphicsEndImageContext();
+    } else {
+        _imageView.image = toast.image;
+    }
+    
     _imageView.contentMode = toast.imageContentMode;
     _activityIndicator.activityIndicatorViewStyle = toast.activityIndicatorViewStyle;
     self.backgroundColor = toast.backgroundColor;
