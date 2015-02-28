@@ -226,8 +226,30 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
     } else {
         _imageView.image = toast.image;
     }
+    _imageView.contentMode = toast.imageContentMode;
+    
+    if (toast.imageCornerRadius > 0) {
+        // Begin a new image that will be the new image with the rounded corners
+        // (here with the size of an UIImageView)
+        UIGraphicsBeginImageContextWithOptions(self.toast.imageSize, NO, 1.0);
+        
+        CGRect imageRect = CGRectMake(0, 0, self.toast.imageSize.width, self.toast.imageSize.height);
+        
+        // Add a clip before drawing anything, in the shape of an rounded rect
+        [[UIBezierPath bezierPathWithRoundedRect:imageRect
+                                    cornerRadius:toast.imageCornerRadius] addClip];
+        // Draw your image
+        [_imageView.image drawInRect:imageRect];
+        
+        // Get the image, here setting the UIImageView image
+        _imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+        
+        // Lets forget about that we were drawing
+        UIGraphicsEndImageContext();
+    }
     
     _imageView.contentMode = toast.imageContentMode;
+    
     _activityIndicator.activityIndicatorViewStyle = toast.activityIndicatorViewStyle;
     self.backgroundColor = toast.backgroundColor;
     

@@ -214,6 +214,7 @@ NSString *const kCRToastStatusBarStyleKey                   = @"kCRToastStatusBa
 NSString *const kCRToastBackgroundColorKey                  = @"kCRToastBackgroundColorKey";
 NSString *const kCRToastBackgroundViewKey                   = @"kCRToastBackgroundViewKey";
 NSString *const kCRToastImageKey                            = @"kCRToastImageKey";
+NSString *const kCRToastImageCornerRadiusKey                = @"kCRToastImageCornerRadiusKey";
 NSString *const kCRToastImageSizeKey                        = @"kCRToastImageSizeKey";
 NSString *const kCRToastImageContentModeKey                 = @"kCRToastImageContentModeKey";
 NSString *const kCRToastImageAlignmentKey                   = @"kCRToastImageAlignmentKey";
@@ -269,6 +270,7 @@ static UIStatusBarStyle              kCRStatusBarStyleDefault               = UI
 static UIColor  *                    kCRBackgroundColorDefault              = nil;
 static UIView   *                    kCRBackgroundView                      = nil;
 static UIImage  *                    kCRImageDefault                        = nil;
+static CGFloat                       kCRImageCornerRadiusDefault            = 0.0;
 static CGSize                        kCRImageSizeDefault;
 static UIViewContentMode             kCRImageContentModeDefault             = UIViewContentModeCenter;
 static CRToastAccessoryViewAlignment kCRImageAlignmentDefault               = CRToastAccessoryViewAlignmentLeft;
@@ -341,6 +343,7 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
                                 kCRToastBackgroundColorKey                  : NSStringFromClass([UIColor class]),
                                 kCRToastBackgroundViewKey                   : NSStringFromClass([UIView class]),
                                 kCRToastImageKey                            : NSStringFromClass([UIImage class]),
+                                kCRToastImageCornerRadiusKey                : NSStringFromClass([@(kCRImageCornerRadiusDefault) class]),
                                 kCRToastImageSizeKey                        : NSStringFromClass([[NSValue valueWithCGSize:kCRImageSizeDefault] class]),
                                 kCRToastImageContentModeKey                 : NSStringFromClass([@(kCRImageContentModeDefault) class]),
                                 kCRToastImageAlignmentKey                   : NSStringFromClass([@(kCRImageAlignmentDefault) class]),
@@ -665,6 +668,11 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
 
 - (UIImage*)image {
     return _options[kCRToastImageKey] ?: kCRImageDefault;
+}
+
+- (CGFloat)imageCornerRadius
+{
+    return _options[kCRToastImageCornerRadiusKey] ? [_options[kCRToastImageCornerRadiusKey] floatValue] : kCRImageCornerRadiusDefault;
 }
 
 - (CGSize)imageSize {

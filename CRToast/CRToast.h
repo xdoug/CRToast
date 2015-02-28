@@ -309,6 +309,11 @@ extern NSString *const kCRToastImageKey;
 extern NSString *const kCRToastImageSizeKey;
 
 /**
+ The radius to be used when drawing rounded corners for the `kCRToastImageKey` image. Expects type `NSNumber` with a `CGFloat`.
+ */
+extern NSString *const kCRToastImageCornerRadiusKey;
+
+/**
  The image content mode to use for `kCRToastImageKey` image. Exptects type `UIViewContentMode`
  */
 extern NSString *const kCRToastImageContentModeKey;
@@ -426,6 +431,7 @@ extern NSString *const kCRToastCaptureDefaultWindowKey;
 @property (nonatomic, readonly) UIColor *backgroundColor;
 @property (nonatomic, readonly) UIView *backgroundView;
 @property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, readonly) CGFloat imageCornerRadius;
 @property (nonatomic, readonly) CGSize imageSize;
 @property (nonatomic, readonly) UIViewContentMode imageContentMode;
 @property (nonatomic, readonly) CRToastAccessoryViewAlignment imageAlignment;
